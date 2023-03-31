@@ -1,7 +1,9 @@
-package com.hello.hellospring.repository;
+package hello.hellospring.repository;
 
-import com.hello.hellospring.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+
+import hello.hellospring.domain.Member;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;

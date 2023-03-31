@@ -1,4 +1,4 @@
-package com.hello.hellospring.repository;
+package hello.hellospring.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
+import hello.hellospring.domain.Member;
 
-import com.hello.hellospring.domain.Member;
-
-@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();

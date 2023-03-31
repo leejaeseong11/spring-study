@@ -1,7 +1,4 @@
-package com.hello.hellospring.controller;
-
-import com.hello.hellospring.domain.Member;
-import com.hello.hellospring.service.MemberService;
+package hello.hellospring.controller;
 
 import java.util.List;
 
@@ -10,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import hello.hellospring.domain.Member;
+import hello.hellospring.service.MemberService;
 
 @Controller
 public class MemberController {
