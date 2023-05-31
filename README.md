@@ -2,7 +2,7 @@
 
 ### 환경 설정
 
-- Java 8이 가장 많이 사용됨, VS Code 기반임
+- Java 17, Intellij or VS Code
 - Maven vs Gradle
 - Dependencies
   - Spring Web
