@@ -47,7 +47,7 @@ public class ResponseBodyController {
     }
 }
 /*
-* @RequestBody, @ResponseBody 애노테이션을 사용하거나 HttpEntity를 사용할 때, 스프링은 메시지 컨버터를 통해 데이터를 처리해준다.
+* @RequestBody, @ResponseBody 애노테이션을 사용하거나 HttpEntity를 사용할 때,  스프링은 메시지 컨버터를 통해 데이터를 처리해준다.
 * 이때 클래스타입(byte[], String, 객체 또는 HashMap), 미디어 타입을 체크한다.
 * 그래서 요청 메시지의 데이터를 쉽게 읽어올 수 있고 반환도 간단하게 할 수 있는 것이다.
 * */
