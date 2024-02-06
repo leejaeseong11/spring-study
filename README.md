@@ -2,11 +2,11 @@
 
 ### 출처 강의
 
-1. [스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8)
+1. [스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술](https://www.inflearn.com/course/스프링-입문-스프링부트)
 
 - hellospring
 
-2. [스프링 핵심 원리 - 기본편](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B8%B0%EB%B3%B8%ED%8E%B8)
+2. [스프링 핵심 원리 - 기본편](https://www.inflearn.com/course/스프링-핵심-원리-기본편)
 
 - core
 
@@ -16,9 +16,9 @@
 - springmvc
 - item-service
 
-4. []()
+4. [스프링 MVC 2편 - 백엔드 웹 개발 활용 기술](https://www.inflearn.com/course/스프링-mvc-1)
 
--
+- thymeleaft-basic
 
 ### 스프링 입문
 
@@ -153,3 +153,17 @@ AOP
 - https://blog.naver.com/easeon11/223257272458
 - https://blog.naver.com/easeon11/223260678783
 - https://blog.naver.com/easeon11/223314303667
+
+### HTTP 웹 기본 지식
+
+블로그 내용 정리
+
+- https://blog.naver.com/easeon11/223318091407
+- https://blog.naver.com/easeon11/223326691963
+- https://blog.naver.com/easeon11/223328450396
+
+### 스프링 MVC
+
+블로그 내용 정리
+
+- https://blog.naver.com/easeon11/223333615748
