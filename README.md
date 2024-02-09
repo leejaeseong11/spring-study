@@ -20,6 +20,7 @@
 
 - thymeleaft-basic
 - form
+- message
 
 ### 스프링 입문
 

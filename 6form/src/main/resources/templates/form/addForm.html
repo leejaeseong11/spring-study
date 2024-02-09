@@ -16,6 +16,12 @@
 
 
 
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -69,6 +75,19 @@
                        th:text="${type.description}">BOOK</label>
             </div>
         </div>
+
+        <!-- SELECT -->
+        <div>
+            <div>배송 방식</div>
+            <select class="form-select" th:field="*{deliveryCode}">
+                <option value="">==배송 방식 선택==</option>
+                <option th:each="deliveryCode : ${deliveryCodes}" th:text="${deliveryCode.displayName}"
+                        th:value="${deliveryCode.code}">FAST
+                </option>
+            </select>
+        </div>
+
+        <hr class="my-4"/>
 
         <div class="row">
             <div class="col">
