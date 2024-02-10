@@ -1,8 +1,5 @@
 package hello.itemservice.message;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,9 +8,13 @@ import org.springframework.context.NoSuchMessageException;
 
 import java.util.Locale;
 
+import static org.assertj.core.api.Assertions.*;
+
 @SpringBootTest
 public class MessageSourceTest {
-    @Autowired MessageSource ms;
+
+    @Autowired
+    MessageSource ms;
 
     @Test
     void helloMessage() {
@@ -35,7 +36,7 @@ public class MessageSourceTest {
 
     @Test
     void argumentMessage() {
-        String result = ms.getMessage("hello.name", new Object[] {"Spring"}, null);
+        String result = ms.getMessage("hello.name", new Object[]{"Spring"}, null);
         assertThat(result).isEqualTo("안녕 Spring");
     }
 

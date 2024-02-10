@@ -9,9 +9,6 @@
             max-width: 560px;
         }
 
-
-
-
     </style>
 </head>
 <body>
@@ -19,7 +16,7 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2 th:text="#{page.updateItem}">상품 수정 폼</h2>
+        <h2 th:text="#{page.updateItem}">상품 수정</h2>
     </div>
 
     <form action="item.html" method="post" th:action th:object="${item}">
@@ -49,7 +46,7 @@
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='item.html'"
-                        th:onclick="|location.href='@{/message/items/{itemId}(itemId=${item.id})}'|"
+                        th:onclick="|location.href='@{/validation/v2/items/{itemId}(itemId=${item.id})}'|"
                         th:text="#{button.cancel}" type="button">취소
                 </button>
             </div>

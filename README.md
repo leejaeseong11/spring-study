@@ -21,6 +21,7 @@
 - thymeleaft-basic
 - form
 - message
+- validation
 
 ### 스프링 입문
 
