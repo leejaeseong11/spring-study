@@ -17,6 +17,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -66,7 +67,7 @@
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='item.html'"
-                        th:onclick="|location.href='@{/validation/v3/items/{itemId}(itemId=${item.id})}'|"
+                        th:onclick="|location.href='@{/validation/v4/items/{itemId}(itemId=${item.id})}'|"
                         th:text="#{button.cancel}" type="button">취소
                 </button>
             </div>
