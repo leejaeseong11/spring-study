@@ -40,7 +40,7 @@ public class ConverterController {
     // @Data -> 해당 어노테이션만 사용하면 에러남
     // ModelAttribute를 바인딩 하기 위해 Form의 생성자를 사용하는데 해당 생성자의 ipPort라는 파라미터를 알 수 없음
     // @ConstructorProperties로 파라미터 이름을 명시해주거나,
-    // @Setter, @NoArgsConstructor를 통해 기본 생성자로 바인딩 하도록 해주어야 함
+    // @Setter, @NoArgsConstructor를 통해 기본 생성자를 넣고 setter로 바인딩 하도록 해주어야 함
     static class Form {
         private IpPort ipPort;
 
