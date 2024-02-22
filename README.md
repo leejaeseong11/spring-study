@@ -29,6 +29,8 @@
 
 5. [스프링 DB 1편 - 데이터 접근 핵심 원리](https://www.inflearn.com/course/스프링-db-1)
 - jdbc
+6. [스프링 DB 2편 - 데이터 접근 활용 기술](https://www.inflearn.com/course/스프링-db-2)
+- itemservice-db
 
 ### 스프링 입문
 
