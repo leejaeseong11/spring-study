@@ -11,13 +11,24 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @SpringBootTest
 class ItemRepositoryTest {
 
     @Autowired ItemRepository itemRepository;
+
+    //    @Autowired PlatformTransactionManager transactionManager;
+    //    TransactionStatus status;
+    //
+    //    @BeforeEach
+    //    void beforeEach() {
+    //        // 트랙잭션 시작
+    //        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+    //    }
 
     @AfterEach
     void afterEach() {
@@ -25,8 +36,11 @@ class ItemRepositoryTest {
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
+        // 트랜잭션 롤백
+        //        transactionManager.rollback(status);
     }
 
+    // @Commit 혹은 @Rollback(false)로 강제 커밋 가능
     @Test
     void save() {
         // given
