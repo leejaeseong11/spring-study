@@ -10,15 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-import javax.sql.DataSource;
 
 @Slf4j
 // @Import(MemoryConfig.class)
 // @Import(JdbcTemplateV1Config.class)
 // @Import(JdbcTemplateV2Config.class)
-@Import(JdbcTemplateV3Config.class)
+// @Import(JdbcTemplateV3Config.class)
+@Import(MyBatisConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
