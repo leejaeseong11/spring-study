@@ -2,8 +2,10 @@ package hello.itemservice.config;
 
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.jpa.JpaItemRepositoryV3;
+import hello.itemservice.repository.v2.ItemQueryRepositoryV2;
+import hello.itemservice.repository.v2.ItemRepositoryV2;
 import hello.itemservice.service.ItemService;
-import hello.itemservice.service.ItemServiceV1;
+import hello.itemservice.service.ItemServiceV2;
 
 import jakarta.persistence.EntityManager;
 
@@ -14,14 +16,21 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class QuerydslConfig {
+public class V2Config {
     private final EntityManager em;
+    private final ItemRepositoryV2 itemRepositoryV2; // SpringDataJPA
 
     @Bean
     public ItemService itemService() {
-        return new ItemServiceV1(itemRepository());
+        return new ItemServiceV2(itemRepositoryV2, itemQueryRepositoryV2());
     }
 
+    @Bean
+    public ItemQueryRepositoryV2 itemQueryRepositoryV2() {
+        return new ItemQueryRepositoryV2(em);
+    }
+
+    // 테스트 데이터를 넣기 위해 등록함
     @Bean
     public ItemRepository itemRepository() {
         return new JpaItemRepositoryV3(em);

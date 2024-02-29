@@ -1,4 +1,4 @@
-package hello.itemservice.repository;
+package hello.itemservice.repository.jpa;
 
 import static hello.itemservice.domain.QItem.*;
 
@@ -8,6 +8,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import hello.itemservice.domain.Item;
 import hello.itemservice.domain.QItem;
+import hello.itemservice.repository.ItemRepository;
+import hello.itemservice.repository.ItemSearchCond;
+import hello.itemservice.repository.ItemUpdateDto;
 
 import jakarta.persistence.EntityManager;
 
