@@ -4,6 +4,8 @@ import hello.proxy.config.v2_dynamicproxy.DynamicProxyBasicConfig;
 import hello.proxy.config.v2_dynamicproxy.DynamicProxyFilterConfig;
 import hello.proxy.config.v3_proxyfactory.ProxyFactoryConfigV1;
 import hello.proxy.config.v3_proxyfactory.ProxyFactoryConfigV2;
+import hello.proxy.config.v4_postprocessor.BeanPostProcessorConfig;
+import hello.proxy.config.v5_autoproxy.AutoProxyConfig;
 import hello.proxy.trace.logtrace.LogTrace;
 import hello.proxy.trace.logtrace.ThreadLocalLogTrace;
 
@@ -18,8 +20,11 @@ import org.springframework.context.annotation.Import;
 // @Import(DynamicProxyBasicConfig.class)
 // @Import(DynamicProxyFilterConfig.class)
 // @Import(ProxyFactoryConfigV1.class)
-@Import(ProxyFactoryConfigV2.class)
-@SpringBootApplication(scanBasePackages = "hello.proxy.app.v3") // 주의
+// @Import(ProxyFactoryConfigV2.class)
+// @Import(BeanPostProcessorConfig.class)
+@Import(AutoProxyConfig.class)
+@SpringBootApplication(
+        scanBasePackages = "hello.proxy.app.v3") // 컴포넌트 스캔 범위를 지정하여 원하는 패키지의 것만 빈으로 등록
 public class ProxyApplication {
 
     public static void main(String[] args) {
