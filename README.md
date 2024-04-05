@@ -37,6 +37,7 @@
 7. [스프링 핵심 원리 - 고급편](https://www.inflearn.com/course/스프링-핵심-원리-고급편)
 - advanced
 - proxy
+- aop
 
 ### 스프링 입문
 
