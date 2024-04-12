@@ -1,33 +1,62 @@
 package hellojpa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
+@Table
+// @SequenceGenerator(name = "member_seq_generator", sequenceName = "member_esq")
+@TableGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        table = "MY_SEQUENCE",
+        pkColumnName = "MEMBER_SEQ",
+        allocationSize = 1)
 public class Member {
-    @Id private Long id;
-    private String name;
+    @Id
+    // 기본키 생성 전략을 DB에 위임, 이 경우 영속성 컨텍스트 관리를 위해 트랜잭션 커밋 전에 insert 쿼리가 발생함
+    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @SequenceGenerator와 함께 시퀀스 전략, insert할 때 영속성 컨텍스트 관리를 위해 DB에서 시퀀스 값을 먼저 가져옴
+    // @SequenceGenerator에서 allocationSize 옵션을 쓰면 DB 시퀀스 값을 미리 올려두고 메모리에서 값을 가져와서 설정하기 때문에 시퀀스 값을 매번
+    // 가져오지 않음
+    //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
+    // 시퀀스로 쓸 TABLE을 생성하는 전략
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
+    private Long id;
 
-    private Member() {}
+    @Column(name = "name")
+    private String username;
 
-    public Member(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private Integer age;
 
-    public Long getId() {
-        return id;
-    }
+    // EnumType.ORDINAL: enum 타입의 순서가 저장됨
+    // EnumType.STRING: enum 타입의 실제 값이 저장됨
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // @Temporal 대신 그냥 LocalDate 쓰면 됨
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
-    public String getName() {
-        return name;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    // BLOB, CLOB 타입에 매핑
+    @Lob private String description;
+
+    @Transient // DB와 매핑 안 함
+    private int temp;
+
+    /*
+    @Column 매핑 옵션
+    - name: 필드와 매핑할 테이블 컬럼 이름
+    - insertable, updatable: 등록, 변경 가능 여부
+    - nullable: NULL 허용 여부
+    - unique: 유니크 제약조건
+    - columnDefinition: 컬럼을 직접 정의
+    - precision, decimal: BigDecimal 타입 매핑에 사용
+    */
+
+    // JPA에서 리플렉션을 통한 객체를 생성하기 때문에 기본 생성자 필수
+    public Member() {}
 }

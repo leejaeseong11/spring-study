@@ -92,12 +92,18 @@ public class JpaMain {
             //            System.out.println("===================="); // 이전에 insert 쿼리 발생함
 
             /*==========준영속==========*/
-            Member member = em.find(Member.class, 6L);
-            member.setName("ZZZ"); // 영속 엔티티 데이터 수정
+            //            Member member = em.find(Member.class, 6L);
+            //            member.setName("ZZZ"); // 영속 엔티티 데이터 수정
 
-            //            em.detach(member); // 영속성 컨텍스트에서 더 이상 관리하지 않음
-            em.clear(); // 영속성 컨텍스트를 완전히 비움
-            Member member2 = em.find(Member.class, 6L); // select 쿼리 두 번 발생
+            //            //            em.detach(member); // 영속성 컨텍스트에서 더 이상 관리하지 않음
+            //            em.clear(); // 영속성 컨텍스트를 완전히 비움
+            //            Member member2 = em.find(Member.class, 6L); // select 쿼리 두 번 발생
+
+            //            Member member = new Member();
+            //            member.setId(1L);
+            //            member.setUsername("A");
+            //            member.setRoleType(RoleType.USER);
+            //            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
