@@ -1,9 +1,9 @@
 package jpabook.jpashop.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -16,6 +16,10 @@ public class Member {
     private String city;
     private String street;
     private String zipcode;
+
+    // 보통 멤버가 굳이 주문 정보를 가지고 있는 건 관심사 분리가 되지 않는 좋은 설계가 아니니 예시로만 볼 것
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     public Long getId() {
         return id;

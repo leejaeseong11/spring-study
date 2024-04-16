@@ -2,6 +2,8 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -104,6 +106,29 @@ public class JpaMain {
             //            member.setUsername("A");
             //            member.setRoleType(RoleType.USER);
             //            em.persist(member);
+
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            //            member.setTeamId(team.getId());
+            member.changeTeam(team);
+            em.persist(member);
+
+            // 영속성 컨텍스트를 정리하지 않으면 팀에 속한 유저 정보를 제대로 가져오지 못함
+            //            em.flush();
+            //            em.clear();
+            // 양방향 관계에서는 양쪽 모두 데이터를 넣어주는 것이 좋음, 위 과정 없어도 데이터 조회됨
+            //            연
+
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members) {
+                System.out.println("m.getUsername() = " + m.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e) {

@@ -15,6 +15,9 @@ public class JpaMain {
         tx.begin();
 
         try {
+            // 주문 객체에 주문 아이템 추가하기
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
