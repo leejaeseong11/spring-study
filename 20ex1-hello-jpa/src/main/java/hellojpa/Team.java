@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Team {
+public class Team extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "TEAM_ID")
@@ -16,7 +16,10 @@ public class Team {
 
     // 양방향 연관관계, 연관관계의 주인에 매핑된 변수명 넣어줘야 함
     // 읽기 전용 속성
-    @OneToMany(mappedBy = "team")
+    //    @OneToMany(mappedBy = "team")
+    // 일대다 관계
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
     private List<Member> members = new ArrayList<>();
 
     public Long getId() {

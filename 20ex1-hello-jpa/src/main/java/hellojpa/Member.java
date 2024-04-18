@@ -2,6 +2,9 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table
 // @SequenceGenerator(name = "member_seq_generator", sequenceName = "member_esq")
@@ -10,7 +13,7 @@ import jakarta.persistence.*;
 //        table = "MY_SEQUENCE",
 //        pkColumnName = "MEMBER_SEQ",
 //        allocationSize = 1)
-public class Member {
+public class Member extends BaseEntity {
     @Id
     // 기본키 생성 전략을 DB에 위임, 이 경우 영속성 컨텍스트 관리를 위해 트랜잭션 커밋 전에 insert 쿼리가 발생함
     //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +34,21 @@ public class Member {
     //    private Long teamId;
     // 외래키가 있는 곳이 연관관계의 주인
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
+    //    @JoinColumn(name = "TEAM_ID")
+    // 일대다 양방향을 위해 억지로 읽기 전용 속성으로 만들기
+    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
+    //    @ManyToMany
+    //    @JoinTable(name = "MEMBER_PRODUCT")
+    //    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     //    private Integer age;
 
@@ -83,13 +99,17 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
-    }
+    //    public Team getTeam() {
+    //        return team;
+    //    }
 
-    public void changeTeam(Team team) {
-        this.team = team;
-        // 양방향 관계에서는 양쪽 모두 데이터 넣어주기, 혹은 반대쪽에서 해도 괜찮음, 단 무한루프 조심
-        team.getMembers().add(this);
-    }
+    //    public void setTeam(Team team) {
+    //        this.team = team;
+    //    }
+    //
+    //    public void changeTeam(Team team) {
+    //        this.team = team;
+    //        // 양방향 관계에서는 양쪽 모두 데이터 넣어주기, 혹은 반대쪽에서 해도 괜찮음, 단 무한루프 조심
+    //        team.getMembers().add(this);
+    //    }
 }

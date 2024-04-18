@@ -2,7 +2,7 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class JpaMain {
 
@@ -107,28 +107,63 @@ public class JpaMain {
             //            member.setRoleType(RoleType.USER);
             //            em.persist(member);
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
-
-            Member member = new Member();
-            member.setUsername("member1");
+            //            Team team = new Team();
+            //            team.setName("teamA");
+            //            em.persist(team);
+            //
+            //            Member member = new Member();
+            //            member.setUsername("member1");
             //            member.setTeamId(team.getId());
-            member.changeTeam(team);
-            em.persist(member);
+            //            member.changeTeam(team);
+            //            member.setTeam(team);
+            //            em.persist(member);
 
             // 영속성 컨텍스트를 정리하지 않으면 팀에 속한 유저 정보를 제대로 가져오지 못함
             //            em.flush();
             //            em.clear();
             // 양방향 관계에서는 양쪽 모두 데이터를 넣어주는 것이 좋음, 위 과정 없어도 데이터 조회됨
-            //            연
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
+            //            Member findMember = em.find(Member.class, member.getId());
+            //            List<Member> members = findMember.getTeam().getMembers();
+            //            Team findTeam = em.find(Team.class, team.getId());
+            //            System.out.println("teamName = " + findMember.getTeam().getName());
+            //            System.out.println("teamMembers = " + findTeam.getMembers());
+            //            for (Member m : members) {
+            //                System.out.println("m.getUsername() = " + m.getUsername());
 
-            for (Member m : members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-            }
+            //            Member member = new Member();
+            //            member.setUsername("member1");
+            //            em.persist(member);
+            //
+            //            Team team = new Team();
+            //            team.setName("teamA");
+            //            team.getMembers().add(member);
+            //            em.persist(team);
+
+            // JOIN 전략으로 테이블을 생성했기 때문에 부모와 자식 테이블에 각각 데이터가 들어감
+            //            Movie movie = new Movie();
+            //            movie.setDirector("A");
+            //            movie.setActor("B");
+            //            movie.setName("바람과함께사라지다");
+            //            movie.setPrice(10000);
+            //
+            //            em.persist(movie);
+            //
+            //            em.flush();
+            //            em.clear();
+
+            //            Movie findMovie = em.find(Movie.class, movie.getId());
+            //            System.out.println("findMovie = " + findMovie);
+
+            // TABLE_PER_CLASS 전략을 쓰는 경우 부모 타입으로 조회하면 union 쿼리를 써서 성능이 안 좋음
+            //            Item findItem = em.find(Item.class, movie.getId());
+
+            Member member = new Member();
+            member.setUsername("user1");
+            member.setCreatedBy("kim");
+            member.setCreatedDate(LocalDateTime.now());
+
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {

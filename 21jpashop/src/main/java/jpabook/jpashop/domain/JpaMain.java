@@ -16,8 +16,15 @@ public class JpaMain {
 
         try {
             // 주문 객체에 주문 아이템 추가하기
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
+            //            Order order = new Order();
+            //            order.addOrderItem(new OrderItem());
+
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("kim");
+
+            em.persist(book);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
