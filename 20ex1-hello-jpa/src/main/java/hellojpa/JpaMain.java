@@ -2,8 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -239,22 +237,98 @@ public class JpaMain {
             // Member.class)
             //                            .getResultList();
 
-            Child child1 = new Child();
-            Child child2 = new Child();
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
-            em.persist(parent);
+            //            Child child1 = new Child();
+            //            Child child2 = new Child();
+            //            Parent parent = new Parent();
+            //            parent.addChild(child1);
+            //            parent.addChild(child2);
+            //            em.persist(parent);
+            //
+            //            em.flush();
+            //            em.clear();
+            //
+            //            Parent findParent = em.find(Parent.class, parent.getId());
+            //            findParent.getChildList().remove(0);
+            //
+            //            List<Child> childList =
+            //                    em.createQuery("select c from Child c",
+            // Child.class).getResultList();
+            //            System.out.println("child size= " + childList.size());
 
-            em.flush();
-            em.clear();
+            //            MemberEmbedded member = new MemberEmbedded();
+            //            member.setName("hello");
+            //            member.setHomeAddress(new Address("city", "street", "100"));
+            //            member.setWorkPeriod(new Period());
+            //            em.persist(member);
 
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            // 임베디드 값 타입을 여러 엔티티가 공유하면 위험하기 때문에 복사해서 사용해야 함
+            //            Address address = new Address("city", "street", "100");
+            //            MemberEmbedded member = new MemberEmbedded();
+            //            member.setName("member1");
+            //            member.setHomeAddress(address);
+            //            em.persist(member);
+            //
+            //            Address copyAddress =
+            //                    new Address(address.getCity(), address.getStreet(),
+            // address.getZipcode());
+            //            MemberEmbedded member2 = new MemberEmbedded();
+            //            member2.setName("member2");
+            //            member2.setHomeAddress(copyAddress);
+            //            em.persist(member2);
 
-            List<Child> childList =
-                    em.createQuery("select c from Child c", Child.class).getResultList();
-            System.out.println("child size= " + childList.size());
+            // 객체는 차라리 setter를 없애고 불변 객체로 만드는 것이 좋음
+            //            address.setCity("newCity");
+
+            // 동등 비교
+            //            Address address1 = new Address("city", "street", "100");
+            //            Address address2 = new Address("city", "street", "100");
+            //            System.out.println("address1==address2 : " + (address1.equals(address2)));
+
+            // 값타입 컬렉션
+            MemberEmbedded member = new MemberEmbedded();
+            member.setName("member1");
+            member.setHomeAddress(new Address("home", "street", "100"));
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
+
+            //            member.getAddressHistory().add(new Address("old1", "street1", "100"));
+            //            member.getAddressHistory().add(new Address("old2", "street1", "100"));
+
+            //            em.persist(member);
+            //
+            //            em.flush();
+            //            em.clear();
+            // 값 타입 컬렉션은 지연로딩
+            //            MemberEmbedded findMember = em.find(MemberEmbedded.class, member.getId());
+            //            List<Address> addressHistory = findMember.getAddressHistory();
+            //            for (Address address : addressHistory) {
+            //                System.out.println("address.getCity() = " + address.getCity());
+            //            }
+            //            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+            //            for (String favoriteFood : favoriteFoods) {
+            //                System.out.println("favoriteFood = " + favoriteFood);
+            //            }
+
+            // 값타입 변경 시 새로운 객체를 넣어줄 것
+            //            Address a = findMember.getHomeAddress();
+            //            findMember.setHomeAddress(new Address("newCity", a.getStreet(),
+            // a.getZipcode()));
+            //
+            //            findMember.getFavoriteFoods().remove("치킨");
+            //            findMember.getFavoriteFoods().add("한식");
+
+            // 값타입 컬렉션 변경 사항 발생 시 주인 엔티티와 연관된 모든 데이터 삭제 후 컬렉션에 있는 현재 값을 모두 다시 저장함
+            //            findMember.getAddressHistory().remove(new Address("old1", "street1",
+            // "100"));
+            //            findMember.getAddressHistory().add(new Address("newCity1", "street1",
+            // "100"));
+
+            // 값타입 컬렉션 대신 일대다 관계 사용 고려
+            member.getAddressHistory().add(new AddressEntity("old1", "street1", "100"));
+            member.getAddressHistory().add(new AddressEntity("old2", "street1", "100"));
+
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
