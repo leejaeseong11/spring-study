@@ -3,7 +3,6 @@ package hellojpa;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Locker {
@@ -11,6 +10,6 @@ public class Locker {
 
     private String name;
 
-    @OneToOne(mappedBy = "locker")
-    private Member member;
+    //    @OneToOne(mappedBy = "locker")
+    //    private Member member;
 }

@@ -33,15 +33,16 @@ public class Member extends BaseEntity {
     //    @Column(name = "TEAM_ID")
     //    private Long teamId;
     // 외래키가 있는 곳이 연관관계의 주인
-    @ManyToOne
-    //    @JoinColumn(name = "TEAM_ID")
+    @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩 (ManyToOne, OneToOne에서 직접 적용해줘야 함)
+    //    @ManyToOne(fetch = FetchType.EAGER) // 즉시 로딩
+    @JoinColumn(name = "TEAM_ID")
     // 일대다 양방향을 위해 억지로 읽기 전용 속성으로 만들기
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    //    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+    //    @OneToOne
+    //    @JoinColumn(name = "LOCKER_ID")
+    //    private Locker locker;
 
     //    @ManyToMany
     //    @JoinTable(name = "MEMBER_PRODUCT")
@@ -99,13 +100,13 @@ public class Member extends BaseEntity {
         this.username = username;
     }
 
-    //    public Team getTeam() {
-    //        return team;
-    //    }
+    public Team getTeam() {
+        return team;
+    }
 
-    //    public void setTeam(Team team) {
-    //        this.team = team;
-    //    }
+    public void setTeam(Team team) {
+        this.team = team;
+    }
     //
     //    public void changeTeam(Team team) {
     //        this.team = team;

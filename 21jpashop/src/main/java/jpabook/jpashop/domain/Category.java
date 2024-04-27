@@ -12,7 +12,7 @@ public class Category extends BaseEntity {
     private String name;
 
     // 자기 자신을 참조하는 컬럼도 가능함
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID")
     private Category parent;
 
