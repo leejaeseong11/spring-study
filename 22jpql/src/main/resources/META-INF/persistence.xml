@@ -17,9 +17,10 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
             <!-- 한 번에 전송하는 쿼리 개수 -->
-            <property name="hibernate.jdbc.batch_size" value="10"/>
+            <property name="hibernate.jdbc.batch_size" value="100"/>
             <!-- 데이터베이스 스키마 자동 생성, create / create-drop / update / validate / none 옵션이 있음 -->
             <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.default_batch_fetch_size" value="10"/> <!-- 배치 사이즈 글로벌 설정 -->
         </properties>
     </persistence-unit>
 

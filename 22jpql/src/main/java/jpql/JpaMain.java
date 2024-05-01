@@ -2,6 +2,7 @@ package jpql;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 public class JpaMain {
@@ -14,20 +15,20 @@ public class JpaMain {
         tx.begin();
 
         try {
-            for(int i = 0; i < 2; i++){
-                Team team = new Team();
-                team.setName("teamA");
-                em.persist(team);
-
-                Member member = new Member();
-                member.setUsername("member" + i);
-                member.setAge(i);
-                member.changeTeam(team);
-                member.setType(MemberType.ADMIN);
-                em.persist(member);
-            }
-            em.flush();
-            em.clear();
+//            for(int i = 0; i < 2; i++){
+//                Team team = new Team();
+//                team.setName("teamA");
+//                em.persist(team);
+//
+//                Member member = new Member();
+//                member.setUsername("member" + i);
+//                member.setAge(i);
+//                member.changeTeam(team);
+//                member.setType(MemberType.ADMIN);
+//                em.persist(member);
+//            }
+//            em.flush();
+//            em.clear();
 //            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
             // 반환 타입이 명확하지 않은 경우
 //            Query query = em.createQuery("select m.username, m.age from Member m");
@@ -114,10 +115,95 @@ public class JpaMain {
 //            System.out.println("result = " + result);
 
             // 사용자 정의 함수
-            List<String> resultList = em.createQuery("select group_concat(m.username) from Member m", String.class).getResultList();
-            for (String s : resultList) {
-                System.out.println("s = " + s);
-            }
+//            List<String> resultList = em.createQuery("select group_concat(m.username) from Member m", String.class).getResultList();
+//            for (String s : resultList) {
+//                System.out.println("s = " + s);
+//            }
+
+            // 경로 표현식
+            // 단일 값 연관 경로, 묵시적 내부 조인 발생, 탐색O
+//            String query = "select m.team from Member m";
+//            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
+            // 컬렉션 값 연관 경로, 묵시적 내부 조인 발생, 탐색X
+//            String query = "select t.members from Team t";
+//            TypedQuery<Collection> query1 = em.createQuery(query, Collection.class);
+//            query1.getResultList();
+            // 묵시적 조인은 쿼리를 예상하기 어려우므로 명시적 조인을 쓸 것
+            // 컬렉션 크기 확인
+//            String query = "select size(t.members) from Team t";
+//            Integer result = em.createQuery(query, Integer.class).getSingleResult();
+//            System.out.println("result = " + result);
+
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
+
+            Member member1 = new Member();
+            member1.setUsername("회원1");
+            member1.changeTeam(teamA);
+            em.persist(member1);
+            Member member2 = new Member();
+            member2.setUsername("회원2");
+            member2.changeTeam(teamA);
+            em.persist(member2);
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.changeTeam(teamB);
+            em.persist(member3);
+
+            em.flush();
+            em.clear();
+
+            // 페치 조인을 통해 N+1 문제 해결
+//            String query = "select m from Member m join fetch m.team";
+//            List<Member> resultList = em.createQuery(query, Member.class).getResultList();
+//            for (Member member : resultList) {
+//                System.out.println("member = " + member);
+//            }
+
+            // 컬렉션 페치 조인, 중복 데이터도 제거해줌
+//            String query = "select t from Team t join fetch t.members";
+//            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
+//            for (Team team : resultList) {
+//                System.out.println("team = " + team.getName());
+//                System.out.println("team.getMembers().size() = " + team.getMembers().size());
+//            }
+            // 페치 조인의 한계
+            /**
+             * 페치 조인 대상에 별칭 X
+             * 둘 이상의 컬렉션읜 페치 조인 X
+             * 컬렉션을 페치 조인하면 페이징 API 사용 불가능
+             */
+//            String query = "select t from Team t join fetch t.members";
+//            List<Team> resultList = em.createQuery(query, Team.class).setFirstResult(0).setMaxResults(1).getResultList(); // WARN 발생함
+
+//            String query = "select t from Team t";
+//            List<Team> resultList = em.createQuery(query, Team.class).setFirstResult(0).setMaxResults(10).getResultList();
+//            for (Team team : resultList) {
+//                System.out.println("team = " + team.getName());
+//                System.out.println("team size = " + team.getMembers().size());
+//            }
+
+            // 엔티티를 파라미터로 전달하면 쿼리에는 식별자 값이 들어감
+//            String query = "select m from Member m where m = :member";
+//            Member result = em.createQuery(query, Member.class).setParameter("member", member1).getSingleResult();
+//            System.out.println("result = " + result);
+
+            // named query
+//            Member result = em.createNamedQuery("Member.findByUsername", Member.class).setParameter("username", "회원1").getSingleResult();
+//            System.out.println("result = " + result);
+
+            // 벌크 연산
+            int result = em.createQuery("update Member m set m.age = 20").executeUpdate();
+            System.out.println("result = " + result);
+            // 벜르 연산은 영속성 컨텍스트를 무시하기 때문에 벌크 연산을 먼저 실행하거나 수행 후 영속성 컨텍스트 초기화해야 함
+            System.out.println("member1.getAge() = " + member1.getAge()); // 영속성 컨텍스트에 반영안되고 DB에만 반영되어 있음
+            em.clear();
+            Member findMember = em.find(Member.class, member1.getId());
+            System.out.println("findMember.getAge() = " + findMember.getAge());
 
             tx.commit();
         } catch (Exception e) {

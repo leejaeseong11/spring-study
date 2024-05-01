@@ -16,12 +16,12 @@
 
     <dependencies>
         <!-- JPA 하이버네이트 -->
+        <!-- 해당 버전 하이버네이트에서 배치사이즈 보다 작은 데이터가 바인딩 되어야 하는 경우 null로 채우는 문제가 있음 (https://ttl-blog.tistory.com/1202), 6.2.0.CR2 사용 시 문제 해결됨 -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.4.2.Final</version>
         </dependency>
-
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -36,13 +36,11 @@
         </dependency>
 
         <!-- logback -->
-        <!--
-                <dependency>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                    <version>1.4.14</version>
-                </dependency>
-        -->
+<!--        <dependency>-->
+<!--            <groupId>ch.qos.logback</groupId>-->
+<!--            <artifactId>logback-classic</artifactId>-->
+<!--            <version>1.4.14</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>
