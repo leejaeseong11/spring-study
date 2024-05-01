@@ -44,6 +44,9 @@
 - jpashop
 - jpql
 
+9. [실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발](https://www.inflearn.com/course/스프링부트-JPA-활용-1)
+- jpashop
+
 ### 스프링 입문
 
 환경 설정
