@@ -1,11 +1,12 @@
 package jpabook.jpashop.service;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import jakarta.persistence.EntityManager;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,7 +30,7 @@ class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         // then
-        Assertions.assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepository.findOne(savedId));
     }
 
     @Test
@@ -44,7 +45,7 @@ class MemberServiceTest {
         memberService.join(member1);
 
         // then
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalStateException.class,
                 () -> {
                     memberService.join(member2); // 예외 발생
