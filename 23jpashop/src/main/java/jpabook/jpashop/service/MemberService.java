@@ -4,7 +4,7 @@ import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,12 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    /** 회원 가입 */
+    /**
+     * 회원 가입
+     *
+     * @param member
+     * @return
+     */
     @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member); // 중복 회원 검증
@@ -31,7 +36,11 @@ public class MemberService {
         }
     }
 
-    /** 회원 전체 조회 */
+    /**
+     * 회원 전체 조회
+     *
+     * @return
+     */
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
