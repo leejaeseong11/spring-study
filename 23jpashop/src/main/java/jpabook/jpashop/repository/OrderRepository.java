@@ -28,7 +28,7 @@ public class OrderRepository {
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch) {
-        String jpql = "select o from Order o join o.memberm ";
+        String jpql = "select o from Order o join o.member m";
         boolean isFirstCondition = true;
 
         // 주문 상세 검색
