@@ -103,5 +103,25 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        // 컬렉션 조회시 데이터가 뻥튀기 되는 현상을 방지하기 위해 distinct를 붙여야 했으나, 현재 jpa 버전에서는 알아서 최적화 해줌
+        return em.createQuery(
+                        "select distinct o from Order o join fetch o.member m join fetch o.delivery d join fetch o.orderItems oi join fetch oi.item i",
+                        Order.class)
+                // 일대다 컬렉션 페치 조인에서 페이징 쿼리를 하면 쿼리가 아닌 메모리에서 페이징 하기 때문에 위험함
+                //                .setFirstResult(1)
+                //                .setMaxResults(10)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o join fetch o.member m join fetch o.delivery d",
+                        Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     // QueryDSL
 }

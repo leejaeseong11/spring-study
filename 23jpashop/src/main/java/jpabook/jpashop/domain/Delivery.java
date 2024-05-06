@@ -18,7 +18,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    //    @JsonIgnore
+    @JsonIgnore
     @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 
