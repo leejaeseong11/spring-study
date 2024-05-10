@@ -47,7 +47,7 @@
 9. [실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발](https://www.inflearn.com/course/스프링부트-JPA-활용-1) / [실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화](https://www.inflearn.com/course/스프링부트-JPA-API개발-성능최적화)
 - jpashop
 
-10. [스프링-데이터-JPA-실전](https://www.inflearn.com/course/스프링-데이터-JPA-실전)
+10. [실전! 스프링 데이터 JPA](https://www.inflearn.com/course/스프링-데이터-JPA-실전)
 - data-jpa
 
 ### 스프링 입문
