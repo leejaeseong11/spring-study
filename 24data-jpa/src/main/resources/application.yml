@@ -12,6 +12,12 @@ spring:
       hibernate:
         #        show_sql: true
         format_sql: true
+  data:
+    web:
+      pageable: # pageable default global config
+        default-page-size: 10
+        max-page-size: 2000
+#        one-indexed-parameters: true # start page index 1 (not recommend - because not accurate pageable info)
 
 logging:
   level:
