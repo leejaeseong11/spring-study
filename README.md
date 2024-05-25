@@ -50,6 +50,9 @@
 10. [실전! 스프링 데이터 JPA](https://www.inflearn.com/course/스프링-데이터-JPA-실전)
 - data-jpa
 
+11. [실전! Querydsl](https://www.inflearn.com/course/querydsl-실전)
+- 
+
 ### 스프링 입문
 
 환경 설정
