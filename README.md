@@ -51,7 +51,7 @@
 - data-jpa
 
 11. [실전! Querydsl](https://www.inflearn.com/course/querydsl-실전)
-- 
+- querydsl
 
 ### 스프링 입문
 
